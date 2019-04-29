@@ -58,7 +58,14 @@ class DBComponentField extends DBText
             //        continue;
             //    }
             //}
-            $value .= $field->forTemplate();
+            
+            // NOTE(Marcus) 2019-02-20
+            //
+            // Have swapped this to just concating the raw value; it seems unusual to use
+            // forTemplate on a field because the result of this is normally formatted differently
+            // to the raw data which is very undesirable if the component decides to use the
+            // data in a different manner (ie, as a textarea field content)
+            $value .= $field->getValue();
         }
         $this->value = $value;
     }
